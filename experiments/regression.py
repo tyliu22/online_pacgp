@@ -1,19 +1,21 @@
+# import Hydra as hydra
 import hydra
 import random
 from omegaconf import OmegaConf, DictConfig
-from upcycle.random.seed import set_all_seeds
+# from upcycle.random.seed import set_all_seeds
 import time
 import pandas as pd
 from online_gp.utils.dkl import pretrain_stem
 from gpytorch.settings import *
-from upcycle import cuda
+# from upcycle import cuda
 
 
 def startup(hydra_cfg):
     if hydra_cfg.seed is None:
         seed = random.randint(0, 100000)
         hydra_cfg['seed'] = seed
-        set_all_seeds(seed)
+        # set_all_seeds(seed)
+        random.seed(seed)
 
     logger = hydra.utils.instantiate(hydra_cfg.logger)
     hydra_cfg = OmegaConf.to_container(hydra_cfg, resolve=True)  # Resolve config interpolations
@@ -26,7 +28,7 @@ def startup(hydra_cfg):
         torch.set_default_dtype(torch.float64)
 
     print(hydra_cfg.pretty())
-    print(f"GPU available: {torch.cuda.is_available()}")
+    # print(f"GPU available: {torch.cuda.is_available()}")
 
     return hydra_cfg, logger
 
@@ -35,7 +37,7 @@ def get_model(config, init_x, init_y, streaming):
     stem = hydra.utils.instantiate(config.stem)
     model_kwargs = dict(stem=stem, init_x=init_x, init_y=init_y)
     model = hydra.utils.instantiate(config.model, **model_kwargs)
-    return cuda.try_cuda(model)
+    return model
 
 
 def online_regression(batch_model, online_model, train_x, train_y, test_x, test_y,

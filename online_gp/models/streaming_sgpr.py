@@ -181,6 +181,10 @@ class StreamingSGPR(ApproximateGP):
         pred_dist = self.likelihood(self(inputs))
         return pred_dist.mean, pred_dist.variance
 
+    def predict_dis(self, inputs):
+        pred_dist = self.likelihood(self(inputs))
+        return pred_dist.mean, pred_dist.variance
+
     def disable_q_grad(self):
         self.variational_strategy._variational_distribution.variational_mean.requires_grad_(False)
         self.variational_strategy._variational_distribution.chol_variational_covar.requires_grad_(False)
