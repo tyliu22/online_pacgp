@@ -1,4 +1,4 @@
-# _Kernel Interpolation for Scalable Online Gaussian Processes_
+# _STREAMING PAC-BAYES GAUSSIAN PROCESS REGRESSION WITH PERFORMANCE GUARANTEE FOR ONLINE DECISION MAKING_
 
 This repository contains a gpytorch implementation of WISKI (Woodbury Inversion with SKI) from the paper 
 
