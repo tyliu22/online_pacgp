@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "online-pacgp"
+version = "0.1.0"
+description = "Streaming PAC-Bayes Gaussian Process Regression with Performance Guarantee for Online Decision Making"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [{include = "online_gp"}]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.12"
+torch = ">=1.6.0"
+gpytorch = ">=0.3.1"
+botorch = "*"
+numpy = ">=1.16.2"
+scipy = ">=1.2.1"
+scikit-learn = ">=0.20.3"
+pandas = ">=1.0"
+matplotlib = ">=3.0.3"
+seaborn = "*"
+hydra-core = ">=1.0"
+s3fs = ">=0.4"
+tabulate = "*"
+xlrd = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+regression = "experiments.regression:main"
+classification = "experiments.classification:main" 
